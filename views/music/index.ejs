@@ -1,0 +1,33 @@
+ <%- include("../partials/header") %>
+<div class="container">
+    <header id="main" class="jumbotron text-center">
+        <div style="color:white;" class="container">
+            <div id="bga">
+                <h1 class="font"><i class="fas fa-headphones-alt"></i>  MeloDen</h1>
+                <p>View amazing performances from people all over the world!</p>
+                <a class="btn btn-lg btn-primary" style="color:white;" href="music/new">Add New Melody!</a>
+            </div>
+        </div>
+    </header>
+    <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% music.forEach(function(music){ %>
+            <div class="col-md-4 col-sm-6">
+                <div class="thumbnail">
+                    <img src="<%= music.image%>">                
+                    <div class="caption">
+                        <h4><%= music.name.substring(0,21) %>...</h4>
+                        <%if(music.description.length<50){%>
+                            <p><%= music.description %></p>
+                        <% } else { %>
+                        <p><%= music.description.substring(0,40)%>...</p>
+                        <% } %>
+                    </div>
+                    <p>
+                        <a href="/music/<%= music._id %>" class="btn btn-primary">More Info</a>
+                    </p>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+<%- include("../partials/footer") %> 

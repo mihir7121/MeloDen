@@ -1,0 +1,63 @@
+<%- include("../partials/header") %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead font"><i class="fas fa-headphones-alt"></i>  MeloDen</p>
+            <div class="list-group">
+                <% allMusic.forEach(function(musics){ %>    
+                    <% if(musics.name === music.name){%>     
+                    <li class="list-group-item active"><%=musics.name.substring(0,28)%>...</li>  
+                    <% } else { %>             
+                    <a class="list-group-item" href="/music/<%= musics._id %>"><%=musics.name.substring(0,28)%>...</a>
+                    <% } %>
+                <% }); %>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="thumbnail">
+                <img class="img-responsive" src="<%= music.image %>">
+                <div class="caption-full">
+                    <h4><%=music.name%></h4>
+                    <p><%= music.description %></p>
+                    <a class="btn btn-primary" href="<%= music.video %>" style="color:white;">Watch Full Video</a>
+                    <% if(currentUser && music.author.id.equals(currentUser._id)){ %>
+                        <form id="delete-form" action="/music/<%= music._id %>?_method=DELETE" method="POST">
+                            <button class="ml-3 pull-right btn btn-xs btn-danger">Delete</button>
+                        </form>
+                        <a class="btn btn-xs btn-warning pull-right" href="/music/<%= music._id %>/edit">Edit</a>
+                    <% }%>
+                    <p style="text-align:right;">
+                        <em>~Submitted By <strong><%= music.author.username %></strong></em>
+                    </p>
+                </div>
+            </div>
+            <div class="well">
+                <div class="text-right">                    
+                    <a class="btn btn-success"  href="/music/<%= music._id %>/comments/new">Add New Comment</a>
+                </div>
+                <hr>
+                <% music.comments.forEach(function(comment){ %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong style="font-size:16px;"><%= comment.author.username %></strong>
+                            <p id="delete-form" class="bdr"><%= comment.text %>
+                                <span class="ml-10 pull-right">10 days ago</span>
+                                <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                    <form id="delete-form" action="/music/<%=music._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                                        <input type="submit" class="btn btn-xs btn-danger pull-right ml-3" value="Delete">
+                                    </form>
+                                    <a class="btn btn-xs btn-warning pull-right" 
+                                        href="/music/<%=music._id %>/comments/<%=comment._id %>/edit">
+                                        Edit
+                                    </a>                                
+                                <% } %>
+                            </p>                            
+                            <hr>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include("../partials/footer") %>
