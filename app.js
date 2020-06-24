@@ -16,17 +16,17 @@ var commentRoutes    = require("./routes/comments"),
     indexRoutes      = require("./routes/index")
 
 //basic initialisation
-mongoose.connect("mongodb://localhost/meloden", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
-// mongoose.connect('mongodb+srv://Mihir:Mihir-sahir_123@cluster0-epxqy.mongodb.net/meloden?retryWrites=true&w=majority',{
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true, 
-//     useFindAndModify: false,
-//     useCreateIndex: true
-// }).then(() => {
-//     console.log('Connected to DB!');
-// }).catch(err => {
-//     console.log("error:",err.message);
-// });
+//mongoose.connect("mongodb://localhost/meloden", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+mongoose.connect('mongodb+srv://Mihir:Mihir-sahir_123@cluster0.epxqy.mongodb.net/meloden?retryWrites=true&w=majority',{
+    useNewUrlParser: true,
+    useUnifiedTopology: true, 
+    useFindAndModify: false,
+    useCreateIndex: true
+}).then(() => {
+    console.log('Connected to DB!');
+}).catch(err => {
+    console.log("error:",err.message);
+});
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -57,9 +57,9 @@ app.use("/", indexRoutes);
 app.use("/music", musicRoutes);
 app.use("/music/:id/comments", commentRoutes);
 
-// app.listen(process.env.PORT,process.env.IP,function(){
-//     console.log("MeloDen server has started!");
-// });
-app.listen(5000,function(){
+app.listen(process.env.PORT,process.env.IP,function(){
     console.log("MeloDen server has started!");
 });
+// app.listen(5000,function(){
+//     console.log("MeloDen server has started!");
+// });
