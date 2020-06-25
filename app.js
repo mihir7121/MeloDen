@@ -57,9 +57,9 @@ app.use("/", indexRoutes);
 app.use("/music", musicRoutes);
 app.use("/music/:id/comments", commentRoutes);
 
-app.listen(process.env.PORT,process.env.IP,function(){
-    console.log("MeloDen server has started!");
-});
-// app.listen(5000,function(){
+// app.listen(process.env.PORT,process.env.IP,function(){
 //     console.log("MeloDen server has started!");
 // });
+app.listen(5000,function(){
+    console.log("MeloDen server has started!");
+});
