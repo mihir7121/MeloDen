@@ -17,7 +17,7 @@ var commentRoutes    = require("./routes/comments"),
 
 //basic initialisation
 //mongoose.connect("mongodb://localhost/meloden", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
-mongoose.connect('mongodb+srv://Mihir:Mihir-sahir_123@cluster0.epxqy.mongodb.net/meloden?retryWrites=true&w=majority',{
+mongoose.connect('process.env.MONGO_URI',{
     useNewUrlParser: true,
     useUnifiedTopology: true, 
     useFindAndModify: false,
@@ -60,6 +60,6 @@ app.use("/music/:id/comments", commentRoutes);
 // app.listen(process.env.PORT,process.env.IP,function(){
 //     console.log("MeloDen server has started!");
 // });
-app.listen(5000,function(){
+app.listen(process.env.PORT || 5000,function(){
     console.log("MeloDen server has started!");
 });
