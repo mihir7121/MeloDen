@@ -36,7 +36,7 @@ app.use(flash());
 
 //PASSPORT CONIGURATION
 app.use(require("express-session")({
-    secret:"Dating is BT",
+    secret:process.env.SESSION_SECRET,
     resave:false,
     saveUninitialized:false
 }));
